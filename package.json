@@ -1,0 +1,22 @@
+{
+  "name": "vertical-slider",
+  "version": "1.0.0",
+  "description": "vertical slider template",
+  "main": "index.js",
+  "scripts": {
+    "sass": "node-sass -w scss/ -o dist/css/ --recursive"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/znematoadz/vertical-slider.git"
+  },
+  "author": "Gerald Jones",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/znematoadz/vertical-slider/issues"
+  },
+  "homepage": "https://znematoadz.github.io/vertical-slider",
+  "dependencies": {
+    "node-sass": "^4.10.0"
+  }
+}
