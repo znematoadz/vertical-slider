@@ -1,4 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Rajdhani");
+@media screen and (max-width: 575px) {
+  .collapse-header .menu .collapse-nav {
+    flex-flow: column; } }
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -25,16 +29,14 @@ body {
     right: 0;
     width: 0;
     opacity: 0;
-    height: 62px;
     background: rgba(2, 68, 68, 0.5);
     -webkit-transition: all 0.5s ease-out;
-    transition: all 0.5s ease-out; }
+    transition: all 0.5s ease-out;
+    overflow: visible; }
     .collapse-header .menu .collapse-nav {
-      float: right;
+      display: inline-flex;
       margin-right: 100px;
-      height: 62px;
-      line-height: 60px;
-      overflow: hidden; }
+      line-height: 60px; }
       .collapse-header .menu .collapse-nav a {
         position: relative;
         color: #fff;
