@@ -1,31 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Rajdhani");
-
-$font: "Rajdhani", sans-serif;
-
-@mixin easeOut {
-  -webkit-transition: all 0.5s ease-out;
-  transition: all 0.5s ease-out;
-}
-
-@mixin roll-in-blurred-left {
-  -webkit-animation: roll-in-blurred-left 0.8s cubic-bezier(0.23, 1, 0.32, 1)
-    both;
-  animation: roll-in-blurred-left 0.8s cubic-bezier(0.23, 1, 0.32, 1) both;
-}
-
-@mixin roll-out-blurred-right {
-  -webkit-animation: roll-out-blurred-right 0.45s
-    cubic-bezier(0.755, 0.05, 0.855, 0.06) both;
-  animation: roll-out-blurred-right 0.45s cubic-bezier(0.755, 0.05, 0.855, 0.06)
-    both;
-}
-
-@mixin img-background-settings {
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center center;
-}
+@import "config";
+@import "media";
 
 * {
   box-sizing: border-box;
@@ -55,16 +30,13 @@ body {
     right: 0;
     width: 0;
     opacity: 0;
-    height: 62px;
     background: rgba(2, 68, 68, 0.5);
     @include easeOut;
-
+    overflow: visible;
     .collapse-nav {
-      float: right;
+      display: inline-flex;
       margin-right: 100px;
-      height: 62px;
       line-height: 60px;
-      overflow: hidden;
 
       a {
         position: relative;
@@ -76,6 +48,7 @@ body {
         margin-left: 50px;
         border-bottom: 2px solid rgba(255, 255, 255, 0);
         transition: all 0.25s ease;
+
         &:hover {
           padding-bottom: 5px;
           border-bottom: 2px solid rgba(255, 255, 255, 1);

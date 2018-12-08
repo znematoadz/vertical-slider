@@ -1,0 +1,56 @@
+$font: "Rajdhani", sans-serif;
+
+@mixin easeOut {
+  -webkit-transition: all 0.5s ease-out;
+  transition: all 0.5s ease-out;
+}
+
+@mixin roll-in-blurred-left {
+  -webkit-animation: roll-in-blurred-left 0.8s cubic-bezier(0.23, 1, 0.32, 1)
+    both;
+  animation: roll-in-blurred-left 0.8s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+@mixin roll-out-blurred-right {
+  -webkit-animation: roll-out-blurred-right 0.45s
+    cubic-bezier(0.755, 0.05, 0.855, 0.06) both;
+  animation: roll-out-blurred-right 0.45s cubic-bezier(0.755, 0.05, 0.855, 0.06)
+    both;
+}
+
+@mixin img-background-settings {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center center;
+}
+
+@mixin mediaXs {
+  @media screen and (max-width: 400px) {
+    @content;
+  }
+}
+
+@mixin mediaSm {
+  @media screen and (max-width: 575px) {
+    @content;
+  }
+}
+
+@mixin mediaMd {
+  @media screen and (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin mediaLg {
+  @media screen and (min-width: 769px) and (max-width: 1170px) {
+    @content;
+  }
+}
+
+@mixin mediaXl {
+  @media screen and (min-width: 1171px) {
+    @content;
+  }
+}

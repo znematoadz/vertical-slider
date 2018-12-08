@@ -1,0 +1,9 @@
+@include mediaSm {
+  .collapse-header {
+    .menu {
+      .collapse-nav {
+        flex-flow: column;
+      }
+    }
+  }
+}
