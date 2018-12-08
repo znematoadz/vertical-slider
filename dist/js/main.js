@@ -93,17 +93,30 @@ function getTouches(evt) {
 }
 
 function handleTouchStart(e) {
-  xDown = getTouches(e)[0].clientX;
-  yDown = getTouches(e)[0].clientY;
+  if (e.type === "mousedown") {
+    xDown = e.clientX;
+    yDown = e.clientY;
+  } else {
+    xDown = getTouches(e)[0].clientX;
+    yDown = getTouches(e)[0].clientY;
+  }
 }
 
 function handleTouchMove(e) {
+  let xUp = null;
+  let yUp = null;
+
   if (!xDown || !yDown) {
     return;
   }
 
-  var xUp = e.touches[0].clientX;
-  var yUp = e.touches[0].clientY;
+  if (e.type === "mouseup") {
+    xUp = e.clientX;
+    yUp = e.clientY;
+  } else {
+    xUp = e.touches[0].clientX;
+    yUp = e.touches[0].clientY;
+  }
 
   var xDiff = xDown - xUp;
   var yDiff = yDown - yUp;
@@ -165,5 +178,7 @@ function handleTouchMove(e) {
 window.addEventListener("wheel", onScroll);
 document.addEventListener("touchstart", handleTouchStart, false);
 document.addEventListener("touchmove", handleTouchMove, false);
+document.addEventListener("mousedown", handleTouchStart, false);
+document.addEventListener("mouseup", handleTouchMove, false);
 menuBtn.addEventListener("click", navMenu);
 pageNav.forEach(item => item.addEventListener("click", clickNav));
