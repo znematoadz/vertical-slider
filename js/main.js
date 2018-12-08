@@ -83,18 +83,6 @@ function clickNav(e) {
       });
     }
   });
-
-  /*.getAttribute("id") === key
-      ? (e.target.classList.add("selected"),
-        slide.classList.add("current"),
-        slide.classList.remove("next"),
-        slide.classList.remove("prev"),
-        slide.nextElementSibling.classList.add("next"),
-        slide.previousElementSibling.classList.add("prev"))
-      : (e.target.classList.remove("selected"),
-        slide.classList.remove("current"),
-        console.log(e.target))
-  );*/
 }
 
 window.addEventListener("wheel", onScroll);
