@@ -20,6 +20,13 @@ $font: "Rajdhani", sans-serif;
     both;
 }
 
+@mixin img-background-settings {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center center;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -253,23 +260,19 @@ body {
 
   #slide1 {
     background-image: url(../img/cutepuffin.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
+    @include img-background-settings;
   }
   #slide2 {
     background-image: url(../img/longingpuffin.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
+    @include img-background-settings;
   }
   #slide3 {
     background-image: url(../img/puffinrocks.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
+    @include img-background-settings;
   }
   #slide4 {
     background-image: url(../img/puffins.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
+    @include img-background-settings;
   }
 }
 
