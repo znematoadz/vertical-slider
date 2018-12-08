@@ -85,6 +85,85 @@ function clickNav(e) {
   });
 }
 
+let xDown = null;
+let yDown = null;
+
+function getTouches(evt) {
+  return evt.touches;
+}
+
+function handleTouchStart(e) {
+  xDown = getTouches(e)[0].clientX;
+  yDown = getTouches(e)[0].clientY;
+}
+
+function handleTouchMove(e) {
+  if (!xDown || !yDown) {
+    return;
+  }
+
+  var xUp = e.touches[0].clientX;
+  var yUp = e.touches[0].clientY;
+
+  var xDiff = xDown - xUp;
+  var yDiff = yDown - yUp;
+
+  if (Math.abs(xDiff) > Math.abs(yDiff)) {
+    /*most significant*/
+    if (xDiff > 0) {
+      /* left swipe */
+      console.log("left");
+    } else {
+      /* right swipe */
+      console.log("right");
+    }
+  } else {
+    if (yDiff > 0) {
+      /* up swipe */
+      if (e.target.nextElementSibling != null) {
+        e.target.classList.add("prev");
+        e.target.classList.remove("current");
+        e.target.nextElementSibling.classList.add("current");
+        e.target.nextElementSibling.classList.remove("next");
+        let nesID = e.target.nextElementSibling.getAttribute("id");
+        pageNav.forEach(item =>
+          item.getAttribute("data-key") === nesID
+            ? item.classList.add("selected")
+            : item.classList.remove("selected")
+        );
+        if (e.target.nextElementSibling.nextElementSibling === null) {
+          document.getElementById("footerWrapper").classList.add("last-slide");
+          document.getElementById("footerNav").classList.add("last-slide");
+          document.getElementById("arrowIcon").classList.add("last-slide");
+        }
+      }
+    } else {
+      /* down swipe */
+
+      if (e.target.previousElementSibling != null) {
+        e.target.classList.add("next");
+        e.target.classList.remove("current");
+        e.target.previousElementSibling.classList.add("current");
+        e.target.previousElementSibling.classList.remove("prev");
+        document.getElementById("footerWrapper").classList.remove("last-slide");
+        document.getElementById("footerNav").classList.remove("last-slide");
+        document.getElementById("arrowIcon").classList.remove("last-slide");
+        let pesID = e.target.previousElementSibling.getAttribute("id");
+        pageNav.forEach(item =>
+          item.getAttribute("data-key") === pesID
+            ? item.classList.add("selected")
+            : item.classList.remove("selected")
+        );
+      }
+    }
+  }
+  /* reset values */
+  xDown = null;
+  yDown = null;
+}
+
 window.addEventListener("wheel", onScroll);
+document.addEventListener("touchstart", handleTouchStart, false);
+document.addEventListener("touchmove", handleTouchMove, false);
 menuBtn.addEventListener("click", navMenu);
 pageNav.forEach(item => item.addEventListener("click", clickNav));
