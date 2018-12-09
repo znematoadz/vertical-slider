@@ -3,43 +3,51 @@ const menuBtn = document.querySelector(".button-container");
 const collapseNav = document.querySelector(".menu");
 const pageNav = document.querySelectorAll(".navigator.dot");
 
+function pageUp(e) {
+  if (e.target.nextElementSibling != null) {
+    e.target.classList.add("prev");
+    e.target.classList.remove("current");
+    e.target.nextElementSibling.classList.add("current");
+    e.target.nextElementSibling.classList.remove("next");
+    let key = e.target.nextElementSibling.getAttribute("data-key");
+    pageNav.forEach(item =>
+      item.getAttribute("data-key") === key
+        ? item.classList.add("selected")
+        : item.classList.remove("selected")
+    );
+    if (e.target.nextElementSibling.nextElementSibling === null) {
+      document.getElementById("footerWrapper").classList.add("last-slide");
+      document.getElementById("footerNav").classList.add("last-slide");
+      document.getElementById("arrowIcon").classList.add("last-slide");
+    }
+  }
+}
+
+function pageDown(e) {
+  if (e.target.previousElementSibling != null) {
+    e.target.classList.add("next");
+    e.target.classList.remove("current");
+    e.target.previousElementSibling.classList.add("current");
+    e.target.previousElementSibling.classList.remove("prev");
+    document.getElementById("footerWrapper").classList.remove("last-slide");
+    document.getElementById("footerNav").classList.remove("last-slide");
+    document.getElementById("arrowIcon").classList.remove("last-slide");
+    let key = e.target.previousElementSibling.getAttribute("data-key");
+    pageNav.forEach(item =>
+      item.getAttribute("data-key") === key
+        ? item.classList.add("selected")
+        : item.classList.remove("selected")
+    );
+  }
+}
+
 function onScroll(e) {
   e.preventDefault();
 
   if (e.wheelDelta < 0) {
-    if (e.target.nextElementSibling != null) {
-      e.target.classList.add("prev");
-      e.target.classList.remove("current");
-      e.target.nextElementSibling.classList.add("current");
-      e.target.nextElementSibling.classList.remove("next");
-      let nesID = e.target.nextElementSibling.getAttribute("id");
-      pageNav.forEach(item =>
-        item.getAttribute("data-key") === nesID
-          ? item.classList.add("selected")
-          : item.classList.remove("selected")
-      );
-      if (e.target.nextElementSibling.nextElementSibling === null) {
-        document.getElementById("footerWrapper").classList.add("last-slide");
-        document.getElementById("footerNav").classList.add("last-slide");
-        document.getElementById("arrowIcon").classList.add("last-slide");
-      }
-    }
+    pageUp(e);
   } else {
-    if (e.target.previousElementSibling != null) {
-      e.target.classList.add("next");
-      e.target.classList.remove("current");
-      e.target.previousElementSibling.classList.add("current");
-      e.target.previousElementSibling.classList.remove("prev");
-      document.getElementById("footerWrapper").classList.remove("last-slide");
-      document.getElementById("footerNav").classList.remove("last-slide");
-      document.getElementById("arrowIcon").classList.remove("last-slide");
-      let pesID = e.target.previousElementSibling.getAttribute("id");
-      pageNav.forEach(item =>
-        item.getAttribute("data-key") === pesID
-          ? item.classList.add("selected")
-          : item.classList.remove("selected")
-      );
-    }
+    pageDown(e);
   }
 }
 
@@ -53,7 +61,7 @@ function clickNav(e) {
   let key = e.target.getAttribute("data-key");
 
   slides.forEach(slide => {
-    if (slide.id === key) {
+    if (slide.getAttribute("data-key") === key) {
       e.target.classList.add("selected");
       slide.classList.add("current");
       slide.classList.remove("next");
@@ -75,9 +83,16 @@ function clickNav(e) {
         slide.previousElementSibling.classList.remove("current");
       }
     } else {
-      slide.classList.remove("current");
+      let slideKey = slide.getAttribute("data-key");
+
+      slideKey > key
+        ? (slide.classList.replace("current", "next"),
+          slide.classList.replace("prev", "next"))
+        : (slide.classList.replace("current", "prev"),
+          slide.classList.replace("next", "prev"));
+
       pageNav.forEach(dot => {
-        if (dot.getAttribute("data-key") === slide.id) {
+        if (dot.getAttribute("data-key") === slideKey) {
           dot.classList.remove("selected");
         }
       });
@@ -133,41 +148,11 @@ function handleTouchMove(e) {
   } else {
     if (yDiff > 0) {
       /* up swipe */
-      if (e.target.nextElementSibling != null) {
-        e.target.classList.add("prev");
-        e.target.classList.remove("current");
-        e.target.nextElementSibling.classList.add("current");
-        e.target.nextElementSibling.classList.remove("next");
-        let nesID = e.target.nextElementSibling.getAttribute("id");
-        pageNav.forEach(item =>
-          item.getAttribute("data-key") === nesID
-            ? item.classList.add("selected")
-            : item.classList.remove("selected")
-        );
-        if (e.target.nextElementSibling.nextElementSibling === null) {
-          document.getElementById("footerWrapper").classList.add("last-slide");
-          document.getElementById("footerNav").classList.add("last-slide");
-          document.getElementById("arrowIcon").classList.add("last-slide");
-        }
-      }
+      pageUp(e);
     } else {
       /* down swipe */
 
-      if (e.target.previousElementSibling != null) {
-        e.target.classList.add("next");
-        e.target.classList.remove("current");
-        e.target.previousElementSibling.classList.add("current");
-        e.target.previousElementSibling.classList.remove("prev");
-        document.getElementById("footerWrapper").classList.remove("last-slide");
-        document.getElementById("footerNav").classList.remove("last-slide");
-        document.getElementById("arrowIcon").classList.remove("last-slide");
-        let pesID = e.target.previousElementSibling.getAttribute("id");
-        pageNav.forEach(item =>
-          item.getAttribute("data-key") === pesID
-            ? item.classList.add("selected")
-            : item.classList.remove("selected")
-        );
-      }
+      pageDown(e);
     }
   }
   /* reset values */
