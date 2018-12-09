@@ -227,11 +227,13 @@ body {
       visibility: visible;
       -webkit-animation: roll-in-blurred-left 0.8s cubic-bezier(0.23, 1, 0.32, 1) both;
       animation: roll-in-blurred-left 0.8s cubic-bezier(0.23, 1, 0.32, 1) both; }
-  .fixed-footer .arrow.last-slide {
-    opacity: 0;
-    visibility: hidden;
-    -webkit-animation: roll-in-blurred-left 0.8s cubic-bezier(0.23, 1, 0.32, 1) both;
-    animation: roll-in-blurred-left 0.8s cubic-bezier(0.23, 1, 0.32, 1) both; }
+  .fixed-footer .arrow {
+    cursor: pointer; }
+    .fixed-footer .arrow.last-slide {
+      opacity: 0;
+      visibility: hidden;
+      -webkit-animation: roll-in-blurred-left 0.8s cubic-bezier(0.23, 1, 0.32, 1) both;
+      animation: roll-in-blurred-left 0.8s cubic-bezier(0.23, 1, 0.32, 1) both; }
 
 @-webkit-keyframes roll-in-blurred-left {
   0% {

@@ -2,6 +2,7 @@ const slides = document.querySelectorAll(".slider-content");
 const menuBtn = document.querySelector(".button-container");
 const collapseNav = document.querySelector(".menu");
 const pageNav = document.querySelectorAll(".navigator.dot");
+const arrow = document.querySelector("#arrowIcon");
 
 // handles page up for touch, scroll, mouse swipe
 function pageUp(e) {
@@ -164,7 +165,32 @@ function handleTouchMove(e) {
   yDown = null;
 }
 
+function arrowDown() {
+  slides.forEach(slide => {
+    if (slide.classList.contains("current")) {
+      console.log(slide);
+      return (currentSlide = slide);
+    }
+  });
+  if (currentSlide.nextElementSibling != null) {
+    currentSlide.classList.replace("current", "prev");
+    currentSlide.nextElementSibling.classList.replace("next", "current");
+    let key = currentSlide.nextElementSibling.getAttribute("data-key");
+    pageNav.forEach(item =>
+      item.getAttribute("data-key") === key
+        ? item.classList.add("selected")
+        : item.classList.remove("selected")
+    );
+  }
+  if (currentSlide.nextElementSibling.nextElementSibling === null) {
+    document.getElementById("footerWrapper").classList.add("last-slide");
+    document.getElementById("arrowIcon").classList.add("last-slide");
+    document.getElementById("footerNav").classList.add("last-slide");
+  }
+}
+
 window.addEventListener("wheel", onScroll);
+arrow.addEventListener("click", arrowDown);
 document.addEventListener("touchstart", handleTouchStart, false);
 document.addEventListener("touchmove", handleTouchMove, false);
 document.addEventListener("mousedown", handleTouchStart, false);
