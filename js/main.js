@@ -3,6 +3,7 @@ const menuBtn = document.querySelector(".button-container");
 const collapseNav = document.querySelector(".menu");
 const pageNav = document.querySelectorAll(".navigator.dot");
 
+// handles page up for touch, scroll, mouse swipe
 function pageUp(e) {
   if (e.target.nextElementSibling != null) {
     e.target.classList.add("prev");
@@ -23,6 +24,7 @@ function pageUp(e) {
   }
 }
 
+// handles page down for touch, scroll, mouse swipe
 function pageDown(e) {
   if (e.target.previousElementSibling != null) {
     e.target.classList.add("next");
@@ -51,12 +53,14 @@ function onScroll(e) {
   }
 }
 
+// hamburger menu animation and top nav extending
 function navMenu() {
   menuBtn.classList.contains("active")
     ? (menuBtn.classList.remove("active"), collapseNav.classList.remove("open"))
     : (menuBtn.classList.add("active"), collapseNav.classList.add("open"));
 }
 
+// left-side page nav
 function clickNav(e) {
   let key = e.target.getAttribute("data-key");
 
