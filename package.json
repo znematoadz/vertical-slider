@@ -18,7 +18,6 @@
   },
   "homepage": "https://znematoadz.github.io/vertical-slider",
   "dependencies": {
-    "gh-pages": "^2.0.1",
-    "node-sass": "^4.10.0"
+    "gh-pages": "^2.0.1"
   }
 }
